@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Romantic Vibes Italy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --cream:#f5f0e8;--gold:#b8975a;--gold-light:#d4b483;
+  --dark:#1a1714;--warm-gray:#6b6560;--forest:#2d4a3e;
+  --verona:#c0392b;--garda:#2e9db5;--milan:#7b68ee;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;}
+
+/* ── PAGES ── */
+.page{display:none;min-height:100vh;}
+.page.active{display:block;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 3rem;transition:background .4s,padding .4s;}
+nav.scrolled{backdrop-filter:blur(12px);padding:1rem 3rem;}
+nav.dark{background:rgba(26,23,20,.93);}
+nav.verona-nav.scrolled{background:rgba(42,8,5,.95);}
+nav.garda-nav.scrolled{background:rgba(5,26,37,.95);}
+nav.milan-nav.scrolled{background:rgba(26,16,64,.95);}
+.logo{text-decoration:none;cursor:pointer;display:flex;align-items:center;}
+.logo img{height:44px;width:auto;object-fit:contain;}
+.ft-logo img{height:38px;width:auto;object-fit:contain;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;transition:color .3s;cursor:pointer;}
+.nav-links a:hover{color:var(--gold-light);}
+.nav-back{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);cursor:pointer;display:flex;align-items:center;gap:.5rem;transition:color .3s;}
+.nav-back:hover{color:var(--gold-light);}
+.nav-back::before{content:'←';}
+.lang-sw{display:flex;gap:.4rem;}
+.lang-sw button{background:none;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.6);font-size:.6rem;letter-spacing:.1em;padding:.22rem .46rem;cursor:pointer;transition:all .3s;font-family:'Montserrat',sans-serif;}
+.lang-sw button.active,.lang-sw button:hover{border-color:var(--gold-light);color:var(--gold-light);}
+
+/* ── HERO BASE ── */
+.hero{position:relative;height:100vh;overflow:hidden;display:flex;align-items:flex-end;}
+.hero-bg{position:absolute;inset:0;}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);animation:pulse 10s ease-in-out infinite alternate;}
+@keyframes pulse{from{transform:scale(1);}to{transform:scale(1.12);}}
+.hero::before{content:'';position:absolute;inset:1.8rem;border:1px solid rgba(184,151,90,.18);pointer-events:none;z-index:2;}
+.hero-content{position:relative;z-index:3;padding:0 3.5rem 5rem;width:100%;}
+.hero-label{display:inline-flex;align-items:center;gap:.8rem;font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,.2);padding:.4rem 1rem;color:rgba(255,255,255,.6);}
+.hero-label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7.5vw,7rem);font-weight:300;line-height:.95;color:#fff;margin-bottom:1.2rem;}
+.hero h1 em{font-style:italic;color:var(--gold-light);}
+.hero-sub{font-size:.78rem;color:rgba(255,255,255,.5);letter-spacing:.1em;margin-bottom:2.5rem;max-width:520px;line-height:1.9;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn{display:inline-block;padding:1rem 2.5rem;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;font-family:'Montserrat',sans-serif;font-weight:500;cursor:pointer;transition:all .3s;text-decoration:none;border:none;}
+.btn-gold{background:var(--gold);color:var(--dark);}
+.btn-gold:hover{background:var(--gold-light);}
+.btn-ghost{background:transparent;color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.25);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-light);}
+
+/* ── GALLERY ── */
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:280px 280px;gap:3px;}
+.gi{overflow:hidden;cursor:pointer;position:relative;}
+.gi:first-child{grid-row:1/3;}
+.gi-bg{width:100%;height:100%;transition:transform .6s;}
+.gi:hover .gi-bg{transform:scale(1.05);}
+.gi::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.18);transition:background .3s;}
+.gi:hover::after{background:rgba(0,0,0,.05);}
+.gi-lbl{position:absolute;bottom:.8rem;left:1rem;z-index:2;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.gi-all{position:absolute;bottom:.8rem;right:.8rem;z-index:2;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);background:rgba(0,0,0,.5);padding:.3rem .7rem;backdrop-filter:blur(4px);}
+
+/* ── LAYOUT ── */
+.prop-layout{display:grid;grid-template-columns:1fr 360px;gap:3.5rem;max-width:1260px;margin:0 auto;padding:4.5rem 3.5rem;align-items:start;}
+.section-lbl{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:block;}
+.sec-div{display:flex;align-items:center;gap:1.5rem;margin:2.5rem 0 2rem;}
+.sec-div::before,.sec-div::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.08);}
+.sec-div span{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
+
+/* PROPERTY HEADER */
+.prop-hdr{margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid rgba(0,0,0,.08);}
+.prop-name{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:300;line-height:1.1;margin-bottom:.8rem;}
+.prop-name em{font-style:italic;color:var(--gold);}
+.prop-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.2rem;}
+.meta-i{font-size:.7rem;color:var(--warm-gray);}
+.ratings{display:flex;gap:1.5rem;}
+.rb .rp{font-size:.53rem;letter-spacing:.15em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:.2rem;}
+.rb .rs{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;line-height:1;}
+.rb .rst{color:var(--gold);font-size:.72rem;}
+.prop-desc{font-size:.8rem;line-height:2;color:var(--warm-gray);margin-bottom:2rem;}
+.prop-desc strong{color:var(--dark);font-weight:500;}
+
+/* AMENITIES */
+.am-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:2.5rem;}
+.am-item{display:flex;align-items:center;gap:.7rem;font-size:.7rem;color:var(--warm-gray);padding:.7rem;background:#fff;}
+
+/* TUTORIAL */
+.tutorial{background:var(--dark);padding:2rem;margin-bottom:2.5rem;}
+.tutorial h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:#fff;margin-bottom:1.2rem;}
+.t-tabs{display:flex;gap:1px;background:rgba(255,255,255,.07);margin-bottom:1.2rem;}
+.t-tab{padding:.6rem 1.2rem;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .3s;}
+.t-tab.active{background:var(--gold);color:var(--dark);}
+.vid-wrap{width:100%;aspect-ratio:16/9;position:relative;}
+.vid-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.vid-list{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:.8rem;}
+.vid-item{display:flex;align-items:center;gap:.7rem;padding:.7rem;background:rgba(255,255,255,.04);cursor:pointer;transition:all .3s;border-left:2px solid transparent;}
+.vid-item:hover,.vid-item.active{background:rgba(255,255,255,.07);border-left-color:var(--gold);}
+.vi-icon{font-size:1rem;flex-shrink:0;}
+.vi-info{font-size:.62rem;color:rgba(255,255,255,.4);line-height:1.5;}
+.vi-title{color:rgba(255,255,255,.8);font-size:.67rem;margin-bottom:.1rem;}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:2.5rem;}
+.svc-card{padding:1.3rem;border:1px solid rgba(0,0,0,.08);display:flex;align-items:flex-start;gap:.9rem;transition:all .3s;cursor:pointer;text-decoration:none;color:inherit;}
+.svc-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 6px 25px rgba(0,0,0,.08);}
+.svc-icon{font-size:1.6rem;flex-shrink:0;}
+.svc-info h4{font-size:.75rem;font-weight:500;margin-bottom:.3rem;}
+.svc-info p{font-size:.65rem;color:var(--warm-gray);line-height:1.6;}
+.svc-lnk{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-top:.4rem;display:block;}
+
+/* GUIDE */
+.g-tabs{display:flex;border-bottom:1px solid rgba(0,0,0,.1);margin-bottom:1.8rem;}
+.g-tab{padding:.7rem 1.5rem;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;background:none;border:none;color:var(--warm-gray);cursor:pointer;font-family:'Montserrat',sans-serif;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .3s;}
+.g-tab.active{color:var(--dark);border-bottom-color:var(--gold);}
+.g-content{display:none;}
+.g-content.active{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.g-card{padding:1.1rem 1.3rem;background:#fff;border-left:3px solid var(--gold);}
+.g-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;margin-bottom:.3rem;}
+.gc-type{font-size:.53rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;display:block;}
+.g-card p{font-size:.65rem;color:var(--warm-gray);line-height:1.7;}
+.gc-dist{font-size:.58rem;color:rgba(0,0,0,.3);margin-top:.4rem;}
+
+/* BOOKING SIDEBAR */
+.book-sidebar{position:sticky;top:5rem;}
+.book-card{background:#fff;box-shadow:0 20px 60px rgba(0,0,0,.1);}
+.book-hdr{background:var(--dark);padding:1.8rem;}
+.book-hdr h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:#fff;margin-bottom:.3rem;}
+.book-hdr p{font-size:.62rem;color:rgba(255,255,255,.4);}
+.price-row{text-align:center;padding:1.3rem 1.8rem;border-top:1px solid rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;gap:.7rem;}
+.price-row span{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--warm-gray);}
+.price-num{font-family:'Cormorant Garamond',serif;font-size:2.3rem;font-weight:300;color:var(--dark);}
+.price-night{font-size:.62rem;color:var(--warm-gray);}
+.smoobu-wrap{padding:1rem 1.5rem;}
+.book-actions{padding:0 1.5rem 1.5rem;display:flex;flex-direction:column;gap:.7rem;}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:.7rem;background:#25d366;color:#fff;padding:.9rem;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:500;transition:background .3s;}
+.wa-btn:hover{background:#20b958;}
+.book-div{text-align:center;font-size:.58rem;color:rgba(0,0,0,.25);letter-spacing:.12em;text-transform:uppercase;}
+.plats{display:flex;gap:.7rem;}
+.plat-btn{flex:1;padding:.7rem;border:1px solid rgba(0,0,0,.1);text-align:center;text-decoration:none;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--warm-gray);transition:all .3s;cursor:pointer;}
+.plat-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ── HOME PAGE ── */
+.home-hero-bg{background:linear-gradient(135deg,#0d1f18 0%,#1a0d0a 50%,#0a141f 100%);}
+.home-logo-big{font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,11vw,9.5rem);font-weight:300;line-height:.95;color:#fff;margin-bottom:.3em;letter-spacing:-.01em;text-align:center;}
+.home-logo-big em{font-style:italic;} .home-logo-big strong{color:var(--gold-light);font-weight:300;}
+.hero-center{position:relative;z-index:3;text-align:center;padding:2rem;align-self:center;width:100%;}
+.hero-eyebrow{font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-light);margin-bottom:2rem;display:flex;align-items:center;justify-content:center;gap:1.2rem;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:50px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+.hero-eyebrow::after{background:linear-gradient(to left,transparent,var(--gold));}
+.hero-subdests{display:flex;align-items:center;justify-content:center;gap:1.5rem;margin-bottom:2.5rem;flex-wrap:wrap;}
+.hero-subdests span{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.32);}
+.hero-subdests .sep{color:var(--gold);opacity:.5;}
+
+/* VIBES STRIP */
+.vibes-strip{display:grid;grid-template-columns:repeat(3,1fr);background:var(--dark);}
+.vibe-item{padding:2rem 2.5rem;border-right:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:1.2rem;transition:background .3s;cursor:pointer;}
+.vibe-item:last-child{border-right:none;}
+.vibe-item:hover{background:rgba(255,255,255,.04);}
+.vibe-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.vd-milan{background:var(--milan);}
+.vd-garda{background:var(--garda);}
+.vd-verona{background:var(--verona);}
+.vibe-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#fff;font-weight:300;}
+.vibe-name em{font-style:italic;}
+.vibe-meta{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:.2rem;}
+
+/* INTRO */
+.intro{padding:7rem 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;max-width:1200px;margin:0 auto;}
+.intro-eyebrow{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:block;}
+.intro h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;line-height:1.2;margin-bottom:1.5rem;}
+.intro h2 em{font-style:italic;color:var(--gold);}
+.intro p{font-size:.8rem;line-height:2;color:var(--warm-gray);margin-bottom:1rem;}
+.intro-stats{display:flex;gap:2.5rem;margin-top:2rem;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;color:var(--gold);line-height:1;}
+.stat-lbl{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--warm-gray);margin-top:.3rem;}
+.intro-img{width:100%;aspect-ratio:3/4;background:linear-gradient(160deg,#0d1f2d,#1a3040,#2d4a3e);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:5rem;color:rgba(255,255,255,.04);}
+.intro-badge{position:absolute;top:-1.2rem;right:-1.2rem;width:100px;height:100px;background:var(--gold);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.52rem;letter-spacing:.07em;text-transform:uppercase;color:var(--dark);font-weight:500;line-height:1.5;text-align:center;}
+.intro-badge strong{font-size:1.8rem;font-family:'Cormorant Garamond',serif;display:block;line-height:1;}
+
+/* DESTINATIONS */
+.destinations{padding:5rem 0;background:var(--dark);}
+.sec-hdr{text-align:center;margin-bottom:3.5rem;padding:0 3rem;}
+.sec-hdr .ey{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block;}
+.sec-hdr h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:#fff;}
+.sec-hdr h2 em{font-style:italic;color:var(--gold-light);}
+.dest-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:2px;}
+.dest-card{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:2/3;}
+.dest-card.feat{aspect-ratio:unset;}
+.dest-bg{position:absolute;inset:0;transition:transform .7s ease;}
+.dest-card:hover .dest-bg{transform:scale(1.06);}
+.db-v{background:linear-gradient(160deg,#1a0805,#3d1208,#2a0d05);}
+.db-v::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 40% 70%,rgba(192,57,43,.38) 0%,transparent 60%);}
+.db-g{background:linear-gradient(160deg,#051520,#0d2d40,#051a10);}
+.db-g::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(46,157,181,.32) 0%,transparent 60%);}
+.db-m{background:linear-gradient(160deg,#0d0d20,#1a1040,#0d0a1a);}
+.db-m::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 60%,rgba(123,104,238,.32) 0%,transparent 60%);}
+.dest-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.08) 55%);transition:background .5s;}
+.dest-card:hover .dest-ov{background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.28) 55%);}
+.dest-cnt{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.8rem;}
+.dest-vl{display:inline-block;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;padding:.28rem .7rem;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.45);margin-bottom:.8rem;}
+.dest-card.dv .dest-vl{border-color:rgba(192,57,43,.5);color:rgba(255,150,130,.7);}
+.dest-card.dg .dest-vl{border-color:rgba(46,157,181,.5);color:rgba(100,200,220,.7);}
+.dest-card.dm .dest-vl{border-color:rgba(123,104,238,.5);color:rgba(160,140,255,.7);}
+.dest-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:#fff;line-height:1.1;margin-bottom:.7rem;}
+.dest-card.feat .dest-title{font-size:2.8rem;}
+.dest-desc{font-size:.7rem;color:rgba(255,255,255,.52);line-height:1.8;margin-bottom:1rem;max-height:0;overflow:hidden;transition:max-height .5s,opacity .4s;opacity:0;}
+.dest-card:hover .dest-desc{max-height:80px;opacity:1;}
+.dest-footer{display:flex;align-items:center;justify-content:space-between;}
+.dest-props{font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.28);}
+.dest-lnk{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light);display:flex;align-items:center;gap:.4rem;opacity:0;transition:opacity .4s .1s;}
+.dest-card:hover .dest-lnk{opacity:1;}
+.dest-lnk::after{content:'→';}
+.dest-num{position:absolute;top:1.2rem;right:1.5rem;font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:rgba(255,255,255,.06);line-height:1;}
+
+/* FEATURES */
+.features{padding:7rem 3.5rem;max-width:1200px;margin:0 auto;}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem;}
+.feat-item{text-align:center;}
+.feat-icon{width:60px;height:60px;margin:0 auto 1.3rem;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.4rem;position:relative;}
+.feat-icon::before{content:'';position:absolute;inset:4px;border:1px solid rgba(184,151,90,.15);}
+.feat-item h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;margin-bottom:.7rem;}
+.feat-item p{font-size:.7rem;color:var(--warm-gray);line-height:1.9;}
+
+/* BOOKING STRIP */
+.book-strip{background:var(--forest);padding:3.5rem;display:flex;align-items:center;justify-content:space-between;gap:2.5rem;}
+.bs-text h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:#fff;margin-bottom:.4rem;}
+.bs-text p{color:rgba(255,255,255,.4);font-size:.72rem;letter-spacing:.1em;}
+.bk-widget{display:flex;gap:1px;background:rgba(255,255,255,.08);padding:1px;flex:1;max-width:700px;}
+.bk-field{flex:1;background:rgba(255,255,255,.05);padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:.3rem;}
+.bk-field label{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light);}
+.bk-field select,.bk-field input{background:none;border:none;outline:none;color:#fff;font-size:.8rem;font-family:'Montserrat',sans-serif;width:100%;cursor:pointer;}
+.bk-field select option{background:var(--dark);}
+.bk-btn{background:var(--gold);border:none;padding:0 2rem;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dark);font-family:'Montserrat',sans-serif;cursor:pointer;transition:background .3s;font-weight:500;white-space:nowrap;}
+.bk-btn:hover{background:var(--gold-light);}
+
+/* EXPERIENCES */
+.experiences{padding:7rem 3.5rem;background:linear-gradient(160deg,var(--dark) 0%,#12100a 100%);}
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1200px;margin:2.5rem auto 0;}
+.exp-card{border:1px solid rgba(184,151,90,.12);padding:2rem 1.8rem;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;cursor:pointer;}
+.exp-card:hover{border-color:rgba(184,151,90,.45);transform:translateY(-4px);}
+.exp-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--gold);transition:height .4s;}
+.exp-card:hover::before{height:100%;}
+.exp-card span{font-size:2rem;margin-bottom:1rem;display:block;}
+.exp-card h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:#fff;margin-bottom:.7rem;}
+.exp-card p{font-size:.7rem;color:rgba(255,255,255,.38);line-height:1.9;}
+
+/* REVIEWS */
+.reviews{padding:6rem 3.5rem;background:var(--cream);}
+.reviews-inner{max-width:1100px;margin:0 auto;}
+.review-badges{display:flex;justify-content:center;gap:2.5rem;margin-bottom:4rem;flex-wrap:wrap;}
+.rev-badge{display:flex;align-items:center;gap:1.3rem;background:#fff;padding:1.5rem 2rem;box-shadow:0 4px 25px rgba(0,0,0,.07);border-bottom:3px solid var(--gold);min-width:260px;}
+.rb-logo{font-size:1.8rem;flex-shrink:0;}
+.rb-platform{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:.2rem;}
+.rb-score{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--dark);line-height:1;}
+.rb-score span{font-size:.9rem;color:var(--warm-gray);}
+.rb-stars{color:var(--gold);font-size:.75rem;letter-spacing:.1em;margin-top:.2rem;}
+.rb-count{font-size:.6rem;color:var(--warm-gray);margin-top:.12rem;}
+.testimonial{text-align:center;}
+.testi-stars{color:var(--gold);font-size:.95rem;margin-bottom:1.3rem;letter-spacing:.28em;}
+.testimonial blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,2.5vw,2.2rem);font-weight:300;font-style:italic;line-height:1.6;max-width:780px;margin:0 auto 1.8rem;color:var(--dark);}
+.testimonial cite{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-style:normal;}
+
+/* FOOTER */
+footer{background:var(--dark);padding:4rem 3.5rem 2.5rem;display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:2.5rem;}
+.ft-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;text-decoration:none;font-weight:300;cursor:pointer;}
+.ft-logo em{font-style:italic;} .ft-logo strong{color:var(--gold-light);font-weight:300;}
+.ft-brand p{font-size:.7rem;color:rgba(255,255,255,.28);line-height:1.9;margin-top:1rem;max-width:240px;}
+footer h4{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;}
+footer ul{list-style:none;}
+footer ul li{cursor:pointer;color:rgba(255,255,255,.32);font-size:.7rem;line-height:2.4;transition:color .3s;}
+footer ul li:hover{color:var(--gold-light);}
+.ft-bottom{background:rgba(0,0,0,.3);padding:1.3rem 3.5rem;display:flex;justify-content:space-between;align-items:center;}
+.ft-bottom p{font-size:.58rem;color:rgba(255,255,255,.16);letter-spacing:.1em;}
+
+/* VERONA CARDS */
+.prop-cards{display:flex;flex-direction:column;gap:3px;max-width:1300px;margin:0 auto;}
+.vc{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;background:#fff;transition:box-shadow .4s;}
+.vc:hover{box-shadow:0 16px 50px rgba(0,0,0,.14);}
+.vc:nth-child(even){direction:rtl;}
+.vc:nth-child(even)>*{direction:ltr;}
+.vc-vis{position:relative;min-height:360px;overflow:hidden;cursor:pointer;}
+.vc-bg{position:absolute;inset:0;transition:transform .7s ease;}
+.vc:hover .vc-bg{transform:scale(1.05);}
+.vc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,rgba(0,0,0,.08) 55%);}
+.vc-num{position:absolute;top:1.2rem;left:1.5rem;font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;color:rgba(255,255,255,.07);line-height:1;z-index:2;}
+.vc-vis-ft{position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;}
+.vc-vis-name{font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:#fff;font-weight:300;line-height:1.1;}
+.vc-vis-name em{font-style:italic;color:var(--gold-light);}
+.vc-tag{font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.18);padding:.22rem .6rem;}
+.vc-info{padding:2.5rem;display:flex;flex-direction:column;justify-content:space-between;}
+.vc-rating{display:flex;gap:1.3rem;margin-bottom:1.5rem;padding-bottom:1.3rem;border-bottom:1px solid rgba(0,0,0,.07);}
+.vc-desc{font-size:.75rem;line-height:1.9;color:var(--warm-gray);margin-bottom:1.3rem;flex:1;}
+.vc-desc strong{color:var(--dark);font-weight:500;}
+.vc-amenities{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.vc-am{font-size:.62rem;color:var(--warm-gray);background:var(--cream);padding:.25rem .6rem;}
+.vc-price{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--warm-gray);margin-bottom:.8rem;}
+.vc-price strong{font-size:1.7rem;color:var(--dark);font-weight:300;}
+.vc-actions{display:flex;gap:.7rem;flex-wrap:wrap;}
+
+/* GARDA HIGHLIGHT */
+.hl-strip{background:var(--forest);padding:2rem 2.5rem;margin-bottom:2.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.hl-item{text-align:center;}
+.hl-icon{font-size:1.8rem;margin-bottom:.6rem;display:block;}
+.hl-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff;font-weight:300;margin-bottom:.2rem;}
+.hl-desc{font-size:.62rem;color:rgba(255,255,255,.38);line-height:1.7;}
+
+/* MODAL */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:300;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+.modal-ov.open{display:flex;}
+.modal{background:#fff;max-width:580px;width:90%;max-height:90vh;overflow-y:auto;}
+.modal-hdr{background:var(--dark);padding:1.8rem;display:flex;align-items:center;justify-content:space-between;}
+.modal-hdr h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:#fff;}
+.modal-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:1.4rem;cursor:pointer;transition:color .3s;}
+.modal-close:hover{color:#fff;}
+.modal-body{padding:1.8rem;}
+.modal-smoobu{background:var(--cream);padding:1.5rem;text-align:center;margin-bottom:1.3rem;}
+.modal-smoobu p{font-size:.7rem;color:var(--warm-gray);line-height:1.8;margin-bottom:.4rem;}
+.modal-smoobu small{font-size:.56rem;color:rgba(0,0,0,.28);}
+.modal-acts{display:flex;flex-direction:column;gap:.7rem;}
+.modal-plats{display:flex;gap:.7rem;}
+.modal-div{text-align:center;font-size:.58rem;color:rgba(0,0,0,.25);letter-spacing:.12em;text-transform:uppercase;padding:.3rem;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* VERONA/GARDA GUIDE */
+.cg-tabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:2rem;}
+.cg-tab{padding:.7rem 1.8rem;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-family:'Montserrat',sans-serif;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .3s;}
+.cg-tab.active{color:var(--gold-light);border-bottom-color:var(--gold);}
+.cg-content{display:none;grid-template-columns:repeat(4,1fr);gap:1.2rem;}
+.cg-content.active{display:grid;}
+.cg-card{padding:1.3rem;border:1px solid rgba(255,255,255,.07);transition:border-color .3s,transform .3s;}
+.cg-card:hover{border-color:rgba(184,151,90,.4);transform:translateY(-3px);}
+.cg-card .cg-type{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;display:block;}
+.cg-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;color:#fff;margin-bottom:.4rem;}
+.cg-card p{font-size:.65rem;color:rgba(255,255,255,.38);line-height:1.8;}
+.cg-card .cg-dist{font-size:.56rem;color:rgba(255,255,255,.2);margin-top:.5rem;}
+
+/* VERONA TUTORIALS */
+.tuts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;max-width:1260px;margin:0 auto;}
+.tut-card{background:var(--dark);overflow:hidden;}
+.tut-hdr{padding:1.3rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:.7rem;}
+.tut-dot{width:7px;height:7px;border-radius:50%;background:var(--verona);}
+.tut-name{font-family:'Cormorant Garamond',serif;font-size:1rem;color:#fff;font-weight:300;}
+.tut-langs{display:flex;gap:1px;background:rgba(255,255,255,.05);padding:1px;margin:.8rem 1.3rem;}
+.tlang{flex:1;padding:.45rem;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:none;color:rgba(255,255,255,.32);cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .3s;text-align:center;}
+.tlang.active{background:var(--gold);color:var(--dark);}
+.tut-vid{margin:0 1.3rem;background:rgba(255,255,255,.04);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .3s;}
+.tut-vid:hover{background:rgba(255,255,255,.07);}
+.tut-play{width:50px;height:50px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;transition:all .3s;}
+.tut-vid:hover .tut-play{background:var(--gold);color:var(--dark);}
+.tut-links{padding:.8rem 1.3rem 1.3rem;display:flex;flex-direction:column;gap:.35rem;}
+.tut-lnk{display:flex;align-items:center;gap:.5rem;font-size:.62rem;color:rgba(255,255,255,.38);padding:.4rem;transition:color .3s;cursor:pointer;}
+.tut-lnk:hover{color:var(--gold-light);}
+
+/* SRVICES SECTION */
+.svc-section{padding:5rem 3.5rem;}
+.svc-section-inner{max-width:1260px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:center;}
+.svc-text .ey{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1rem;display:block;}
+.svc-text h2{font-family:'Cormorant Garamond',serif;font-size:2.3rem;font-weight:300;color:#fff;line-height:1.2;}
+.svc-text h2 em{font-style:italic;}
+.svc-text p{font-size:.75rem;color:rgba(255,255,255,.42);line-height:1.9;margin-top:1rem;}
+.svc-cards{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
+.svc-c{background:rgba(255,255,255,.05);padding:1.3rem;border:1px solid rgba(255,255,255,.07);transition:all .3s;text-decoration:none;color:inherit;cursor:pointer;display:block;}
+.svc-c:hover{background:rgba(255,255,255,.09);border-color:rgba(184,151,90,.3);}
+.svc-c-icon{font-size:1.6rem;margin-bottom:.7rem;display:block;}
+.svc-c h4{font-size:.72rem;font-weight:500;color:#fff;margin-bottom:.35rem;}
+.svc-c p{font-size:.65rem;color:rgba(255,255,255,.38);line-height:1.7;}
+
+/* STRIP */
+.intro-strip{background:var(--dark);padding:2rem 3.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;}
+.is-item{text-align:center;}
+.is-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--gold-light);line-height:1;}
+.is-lbl{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:.2rem;}
+.is-sep{width:1px;height:44px;background:rgba(255,255,255,.07);}
+
+@media(max-width:768px){
+  .prop-layout,.intro,.dest-grid,.feat-grid,.bk-widget,.vc,.tuts-grid,.svc-section-inner{grid-template-columns:1fr!important;}
+  .book-strip{flex-direction:column;}
+  .bk-widget{flex-direction:column;}
+  nav{padding:1rem 1.5rem;}
+  .hero-content{padding:0 1.5rem 4rem;}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .gi:first-child{grid-row:auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div id="nav-back-wrap"></div>
+  <a class="logo" onclick="goHome()" style="color:rgba(255,255,255,0.9);display:flex;align-items:center;gap:10px;text-decoration:none;"><svg aria-label="Romantic Vibes" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" style="height:46px;width:auto;display:block;"><path d="M50 4 L94 52 L94 128 L6 128 L6 52 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 70 L50 100 L80 70" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/></svg><span style="font-family:'Dancing Script',cursive;font-size:1.25rem;line-height:1.1;color:currentColor;"><span style="display:block">Romantic</span><span style="display:block">Vibes</span></span></a>
+  <div style="display:flex;align-items:center;gap:1.5rem;">
+    <div id="nav-links-home" class="nav-links">
+      <a onclick="showPage('verona')">Verona</a>
+      <a onclick="showPage('desenzano')">Desenzano</a>
+      <a onclick="showPage('milano')">Milano</a>
+    </div>
+    <div class="lang-sw">
+      <button class="active">IT</button>
+      <button>EN</button>
+      <button>DE</button>
+      <button>FR</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero" style="align-items:center;">
+    <div class="hero-bg home-hero-bg">
+      <div class="orb" style="width:650px;height:650px;background:#2d4a3e;top:-150px;left:-100px;opacity:.28;animation-delay:0s;"></div>
+      <div class="orb" style="width:500px;height:500px;background:#4a2a1a;top:20%;right:-80px;opacity:.22;animation-delay:-5s;"></div>
+      <div class="orb" style="width:400px;height:400px;background:#1a0a1a;bottom:-80px;left:35%;opacity:.18;animation-delay:-9s;"></div>
+    </div>
+    <div class="hero-center">
+      <div class="hero-eyebrow">Boutique Stays · Italia del Nord</div>
+      <div class="home-logo-big" style="display:flex;flex-direction:column;align-items:center;"><svg aria-label="Romantic Vibes" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" style="height:90px;width:auto;display:block;margin:0 auto 10px;"><path d="M50 4 L94 52 L94 128 L6 128 L6 52 Z" fill="none" stroke="#b8975a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 70 L50 100 L80 70" fill="none" stroke="#b8975a" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/></svg><div style="font-family:'Dancing Script',cursive;font-size:clamp(3rem,8vw,6rem);font-weight:700;color:#fff;line-height:1.1;text-shadow:0 2px 20px rgba(0,0,0,0.3);">Romantic<br>Vibes</div></div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.5rem);color:rgba(255,255,255,.45);font-style:italic;font-weight:300;margin-bottom:.8rem;">Non un semplice soggiorno. Un'emozione.</p>
+      <div class="hero-subdests">
+        <span>Milano Romantic Vibes</span>
+        <span class="sep">✦</span>
+        <span>Desenzano Romantic Vibes</span>
+        <span class="sep">✦</span>
+        <span>Verona Romantic Vibes</span>
+      </div>
+      <a class="btn btn-gold" onclick="document.getElementById('dest-section').scrollIntoView({behavior:'smooth'})">Scopri le dimore</a>
+    </div>
+  </section>
+
+  <!-- VIBES STRIP -->
+  <div class="vibes-strip">
+    <div class="vibe-item" onclick="showPage('milano')">
+      <div class="vibe-dot vd-milan"></div>
+      <div><div class="vibe-name">Milano <em>Romantic</em> Vibes</div><div class="vibe-meta">1 proprietà · Milano</div></div>
+    </div>
+    <div class="vibe-item" onclick="showPage('desenzano')">
+      <div class="vibe-dot vd-garda"></div>
+      <div><div class="vibe-name">Desenzano <em>Romantic</em> Vibes</div><div class="vibe-meta">1 proprietà · Lago di Garda</div></div>
+    </div>
+    <div class="vibe-item" onclick="showPage('verona')">
+      <div class="vibe-dot vd-verona"></div>
+      <div><div class="vibe-name">Verona <em>Romantic</em> Vibes</div><div class="vibe-meta">3 proprietà · Verona</div></div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro reveal">
+    <div>
+      <span class="intro-eyebrow">La nostra filosofia</span>
+      <h2>Ogni dimora,<br>una <em>vibrazione</em> unica</h2>
+      <p>Abbiamo selezionato ogni proprietà perché crediamo che un viaggio debba lasciare un segno. Non solo nel passaporto, ma nell'anima. Questo è il significato di Romantic Vibes.</p>
+      <p>Milano, il Lago di Garda, Verona. Tre luoghi, tre atmosfere, un'unica promessa: farti vivere l'Italia da dentro.</p>
+      <div class="intro-stats">
+        <div><div class="stat-num">5</div><div class="stat-lbl">Proprietà</div></div>
+        <div><div class="stat-num">3</div><div class="stat-lbl">Destinazioni</div></div>
+        <div><div class="stat-num">4.9</div><div class="stat-lbl">Rating medio</div></div>
+      </div>
+    </div>
+    <div style="position:relative;">
+      <div class="intro-img">✦</div>
+      <div class="intro-badge"><strong>4.9</strong>Rating<br>medio</div>
+    </div>
+  </div>
+
+  <!-- DESTINATIONS -->
+  <section class="destinations" id="dest-section">
+    <div class="sec-hdr reveal">
+      <span class="ey">Le nostre destinazioni</span>
+      <h2>Scegli la tua <em>Vibe</em></h2>
+    </div>
+    <div class="dest-grid">
+      <div class="dest-card feat dv reveal" onclick="showPage('verona')">
+        <div class="dest-bg db-v"></div><div class="dest-ov"></div>
+        <div class="dest-num">03</div>
+        <div class="dest-cnt">
+          <span class="dest-vl">Verona Romantic Vibes</span>
+          <h3 class="dest-title">Verona</h3>
+          <p class="dest-desc">Romeo, Giulietta e un'atmosfera senza tempo. Pietre antiche, serate all'Arena e vini pregiati della Valpolicella.</p>
+          <div class="dest-footer"><span class="dest-props">3 proprietà disponibili</span><span class="dest-lnk">Esplora</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px;">
+        <div class="dest-card dg reveal" style="transition-delay:.1s" onclick="showPage('desenzano')">
+          <div class="dest-bg db-g"></div><div class="dest-ov"></div>
+          <div class="dest-num">01</div>
+          <div class="dest-cnt">
+            <span class="dest-vl">Desenzano Romantic Vibes</span>
+            <h3 class="dest-title">Desenzano<br>del Garda</h3>
+            <p class="dest-desc">Acque cristalline, tramonti infuocati. Dove il tempo rallenta.</p>
+            <div class="dest-footer"><span class="dest-props">1 proprietà</span><span class="dest-lnk">Esplora</span></div>
+          </div>
+        </div>
+        <div class="dest-card dm reveal" style="transition-delay:.2s" onclick="showPage('milano')">
+          <div class="dest-bg db-m"></div><div class="dest-ov"></div>
+          <div class="dest-num">02</div>
+          <div class="dest-cnt">
+            <span class="dest-vl">Milano Romantic Vibes</span>
+            <h3 class="dest-title">Milano</h3>
+            <p class="dest-desc">Moda, design, Aperitivo e Navigli. Il cuore pulsante dell'Italia moderna.</p>
+            <div class="dest-footer"><span class="dest-props">1 proprietà</span><span class="dest-lnk">Esplora</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="feat-grid reveal">
+      <div class="feat-item"><div class="feat-icon">🏛️</div><h3>Dimore curate</h3><p>Ogni proprietà selezionata per stile, posizione e qualità.</p></div>
+      <div class="feat-item"><div class="feat-icon">🎬</div><h3>Tutorial video</h3><p>Video YouTube multilingua per ogni casa. Check-in senza stress.</p></div>
+      <div class="feat-item"><div class="feat-icon">🗺️</div><h3>Guide locali</h3><p>Dove mangiare, cosa fare e i segreti che solo i locali conoscono.</p></div>
+      <div class="feat-item"><div class="feat-icon">⚡</div><h3>Prenotazione istantanea</h3><p>Disponibilità real-time via Smoobu. Conferma immediata.</p></div>
+    </div>
+  </section>
+
+  <!-- BOOKING STRIP -->
+  <div class="book-strip">
+    <div class="bs-text"><h2>Prenota la tua Vibe</h2><p>Disponibilità in tempo reale · Conferma immediata</p></div>
+    <div class="bk-widget">
+      <div class="bk-field"><label>Destinazione</label><select><option>Tutte le dimore</option><option>Verona Romantic Vibes</option><option>Desenzano Romantic Vibes</option><option>Milano Romantic Vibes</option></select></div>
+      <div class="bk-field"><label>Arrivo</label><input type="date"></div>
+      <div class="bk-field"><label>Partenza</label><input type="date"></div>
+      <div class="bk-field"><label>Ospiti</label><select><option>1 ospite</option><option>2 ospiti</option><option>3–4 ospiti</option><option>5+ ospiti</option></select></div>
+      <button class="bk-btn">Cerca</button>
+    </div>
+  </div>
+
+  <!-- EXPERIENCES -->
+  <section class="experiences">
+    <div class="sec-hdr reveal" style="color:#fff;"><span class="ey">Oltre le quattro mura</span><h2>Esperienze che <em>rimangono</em></h2></div>
+    <div class="exp-grid">
+      <div class="exp-card reveal"><span>🍷</span><h3>Dove mangiare</h3><p>Osterie nascoste, trattorie autentiche e ristoranti stellati. Consigli per ogni budget.</p></div>
+      <div class="exp-card reveal" style="transition-delay:.12s"><span>🎭</span><h3>Cosa fare</h3><p>Arena di Verona, passeggiate sul Garda, aperitivi milanesi. Esperienze vere.</p></div>
+      <div class="exp-card reveal" style="transition-delay:.24s"><span>🗺️</span><h3>Dove andare</h3><p>Borghi medievali, vigneti, mercati locali e scorci segreti fuori dalle guide.</p></div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews reveal">
+    <div class="reviews-inner">
+      <div class="sec-hdr" style="margin-bottom:3rem;"><span class="ey">La nostra reputazione</span><h2 style="color:var(--dark);">Cosa dicono i <em style="color:var(--gold)">nostri ospiti</em></h2></div>
+      <div class="review-badges">
+        <div class="rev-badge"><div class="rb-logo">🔵</div><div><div class="rb-platform">Booking.com</div><div class="rb-score">9.4 <span>/ 10</span></div><div class="rb-stars">★★★★★</div><div class="rb-count">Eccezionale · +120 recensioni</div></div></div>
+        <div class="rev-badge"><div class="rb-logo">🌸</div><div><div class="rb-platform">Airbnb</div><div class="rb-score">4.9 <span>/ 5</span></div><div class="rb-stars">★★★★★</div><div class="rb-count">Superhost · +80 recensioni</div></div></div>
+      </div>
+      <div class="testimonial">
+        <div class="testi-stars">★★★★★</div>
+        <blockquote>"Non avevamo mai vissuto un soggiorno così. La casa, i consigli, l'attenzione ai dettagli — tutto perfetto. Torneremo sicuramente."</blockquote>
+        <cite>— Franziska & Marcus, Monaco di Baviera</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="ft-brand">    <a class="ft-logo" onclick="goHome()" style="color:rgba(255,255,255,0.85);display:flex;align-items:center;gap:10px;text-decoration:none;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" style="height:40px;width:auto;display:block;"><path d="M50 4 L94 52 L94 128 L6 128 L6 52 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 70 L50 100 L80 70" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/></svg><span style="font-family:'Dancing Script',cursive;font-size:1.1rem;line-height:1.1;"><span style="display:block">Romantic</span><span style="display:block">Vibes</span></span></a><p>Boutique stays a Milano, Desenzano del Garda e Verona. Tre destinazioni, un'unica Vibe.</p></div>
+    <div><h4>Destinazioni</h4><ul><li onclick="showPage('verona')">Verona Romantic Vibes</li><li onclick="showPage('desenzano')">Desenzano Romantic Vibes</li><li onclick="showPage('milano')">Milano Romantic Vibes</li></ul></div>
+    <div><h4>Informazioni</h4><ul><li>FAQ ospiti</li><li>Privacy Policy</li><li>Termini di servizio</li></ul></div>
+    <div><h4>Contatti</h4><ul><li>WhatsApp</li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="40292e262f00322f2d212e34292336292225336e2934">[email&#160;protected]</a></li><li>Instagram</li></ul></div>
+  </footer>
+  <div class="ft-bottom"><p>© 2025 Romantic Vibes · All rights reserved</p><p>Powered by Smoobu</p></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MILANO PAGE
+══════════════════════════════════════ -->
+<div id="page-milano" class="page">
+  <section class="hero milan-nav">
+    <div class="hero-bg" style="background:linear-gradient(160deg,#0a0820,#1a1040,#1a0d30);">
+      <div class="orb" style="width:700px;height:700px;background:#7b68ee;top:-200px;right:-100px;opacity:.18;"></div>
+      <div class="orb" style="width:500px;height:500px;background:#c0392b;bottom:-100px;left:-50px;opacity:.1;animation-delay:-5s;"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-label" style="color:rgba(160,140,255,.85);border-color:rgba(123,104,238,.3);">
+        <span style="background:var(--milan);border-radius:50%;display:inline-block;width:6px;height:6px;"></span>
+        Milano Romantic Vibes
+      </div>
+      <h1>Centro<br>& <em>Navigli</em></h1>
+      <p class="hero-sub">Un appartamento nel cuore di Milano. Dove il design incontra la dolcezza di casa.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" onclick="document.getElementById('mi-booking').scrollIntoView({behavior:'smooth'})">Prenota ora</a>
+        <a class="btn btn-ghost" onclick="document.getElementById('mi-tutorial').scrollIntoView({behavior:'smooth'})">🎬 Tutorial casa</a>
+        <a class="btn btn-ghost" href="https://wa.me/390240707779" target="_blank">💬 WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <div class="gallery">
+    <div class="gi"><img src="https://img.youtube.com/vi/QQ1YHHPV-zQ/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><span class="gi-lbl">House Tour</span></div>
+    <div class="gi"><img src="https://img.youtube.com/vi/kIQH8CoNiqE/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><span class="gi-lbl">WiFi & Casa</span></div>
+    <div class="gi" style="position:relative"><img src="https://img.youtube.com/vi/OVutfdQRSSE/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><span class="gi-lbl">Cucina</span><span class="gi-all">Tutti i tutorial →</span></div>
+    <div class="gi"><img src="https://img.youtube.com/vi/wTiYxDsQck8/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><span class="gi-lbl">Climatizzazione</span></div>
+    <div class="gi"><img src="https://img.youtube.com/vi/h3An-anjlyQ/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"><span class="gi-lbl">Bagno</span></div>
+  </div>
+
+  <div class="prop-layout">
+    <div>
+      <!-- HEADER -->
+      <div class="prop-hdr reveal">
+        <h2 class="prop-name">M2 Milano<br><em>Centro & Navigli</em></h2>
+        <div class="prop-meta"><span class="meta-i">📍 Navigli, Milano</span><span class="meta-i">👥 Fino a 4 ospiti</span><span class="meta-i">🛏️ 2 camere</span><span class="meta-i">🚇 2 min dalla metro</span></div>
+        <div class="ratings">
+          <div class="rb"><div class="rp">Airbnb</div><div class="rs">4.9</div><div class="rst">★★★★★ Superhost</div></div>
+          <div class="rb"><div class="rp">Booking.com</div><div class="rs">9.4</div><div class="rst">★★★★★ Eccezionale</div></div>
+        </div>
+      </div>
+      <p class="prop-desc reveal">Benvenuti nel nostro appartamento milanese, un rifugio <strong>elegante e accogliente</strong> a pochi passi dai Navigli. Ogni dettaglio pensato per farti sentire <strong>coccolato</strong>: biancheria di qualità, amenità di cortesia, cucina attrezzata e supporto h24.<br><br>Milano ti aspetta fuori dalla porta. Ma quando rientri, qui trovi il tuo angolo di <strong>quiete e bellezza</strong>.</p>
+
+      <!-- AMENITIES -->
+      <div class="reveal">
+        <span class="section-lbl">✦ Cosa trovi</span>
+        <div class="am-grid">
+          <div class="am-item"><span>📶</span> WiFi fibra ottica</div><div class="am-item"><span>❄️</span> Aria condizionata</div><div class="am-item"><span>☕</span> Macchina caffè</div>
+          <div class="am-item"><span>🍳</span> Cucina completa</div><div class="am-item"><span>🧺</span> Lavatrice</div><div class="am-item"><span>📺</span> Smart TV</div>
+          <div class="am-item"><span>🛁</span> Bagno di lusso</div><div class="am-item"><span>🔑</span> Self check-in</div><div class="am-item"><span>🚗</span> Parcheggio vicino</div>
+        </div>
+      </div>
+
+      <div class="sec-div reveal"><span>Tutorial della casa</span></div>
+
+      <!-- TUTORIAL -->
+      <div class="tutorial reveal" id="mi-tutorial">
+        <h3>Guida alla tua dimora</h3>
+        <div class="t-tabs">
+          <button class="t-tab active" onclick="miSetLang('en',this)">🇬🇧 English</button>
+          <button class="t-tab" onclick="miSetLang('it',this)">🇮🇹 Italiano</button>
+          <button class="t-tab" onclick="miSetLang('de',this)">🇩🇪 Deutsch</button>
+          <button class="t-tab" onclick="miSetLang('fr',this)">🇫🇷 Français</button>
+        </div>
+        <div class="vid-wrap"><iframe id="mi-iframe" src="https://www.youtube.com/embed/QQ1YHHPV-zQ" title="Tutorial" allowfullscreen allow="autoplay"></iframe></div>
+        <div class="vid-list" id="mi-vidlist"></div>
+      </div>
+
+      <div class="sec-div reveal"><span>Servizi per gli ospiti</span></div>
+
+      <!-- SERVICES -->
+      <div class="svc-grid reveal">
+        <a href="https://wa.me/390240707779" class="svc-card" target="_blank"><span class="svc-icon">💬</span><div class="svc-info"><h4>WhatsApp h24</h4><p>Rispondiamo sempre in pochi minuti, in 4 lingue.</p><span class="svc-lnk">Scrivici →</span></div></a>
+        <a href="#" class="svc-card"><span class="svc-icon">🤖</span><div class="svc-info"><h4>Assistente Virtuale</h4><p>AI disponibile 24/7 per domande e supporto immediato.</p><span class="svc-lnk">Chatta →</span></div></a>
+        <div class="svc-card"><span class="svc-icon">📶</span><div class="svc-info"><h4>WiFi Fibra</h4><p>Credenziali nella guida casa e nel tutorial video.</p><span class="svc-lnk">Vedi tutorial →</span></div></div>
+        <div class="svc-card"><span class="svc-icon">🔑</span><div class="svc-info"><h4>Self Check-in</h4><p>Istruzioni complete 24h prima del tuo arrivo.</p><span class="svc-lnk">Come funziona →</span></div></div>
+      </div>
+
+      <div class="sec-div reveal"><span>Esplora Milano</span></div>
+
+      <!-- GUIDE -->
+      <div class="reveal">
+        <div class="g-tabs">
+          <button class="g-tab active" onclick="showGuide('mi','mangiare',this)">🍽️ Dove mangiare</button>
+          <button class="g-tab" onclick="showGuide('mi','fare',this)">🎭 Cosa fare</button>
+          <button class="g-tab" onclick="showGuide('mi','andare',this)">🗺️ Dove andare</button>
+        </div>
+        <div id="mi-mangiare" class="g-content active">
+          <div class="g-card"><span class="gc-type">Aperitivo</span><h4>Bar Basso</h4><p>Il tempio del Negroni sbagliato. Aperitivo autentico milanese.</p><div class="gc-dist">📍 Viale Plinio · 10 min</div></div>
+          <div class="g-card"><span class="gc-type">Trattoria</span><h4>Trippa</h4><p>Cucina milanese contemporanea. Prenota con anticipo.</p><div class="gc-dist">📍 Via Giorgio Vasari · 15 min</div></div>
+          <div class="g-card"><span class="gc-type">Colazione</span><h4>Pavé</h4><p>La migliore colazione di Milano. Croissant burrosissimi.</p><div class="gc-dist">📍 Via Felice Casati · 8 min</div></div>
+          <div class="g-card"><span class="gc-type">Cocktail</span><h4>The Botanical Club</h4><p>Gin bar con oltre 400 etichette. Imperdibile.</p><div class="gc-dist">📍 Via Pastrengo · 5 min</div></div>
+        </div>
+        <div id="mi-fare" class="g-content">
+          <div class="g-card"><span class="gc-type">Arte</span><h4>Pinacoteca di Brera</h4><p>Una delle più grandi collezioni d'arte italiana.</p><div class="gc-dist">📍 Via Brera · 20 min metro</div></div>
+          <div class="g-card"><span class="gc-type">Shopping</span><h4>Mercato di Papiniano</h4><p>Il mercato più grande di Milano. Ogni sabato mattina.</p><div class="gc-dist">📍 Viale Papiniano · 10 min</div></div>
+          <div class="g-card"><span class="gc-type">Serata</span><h4>Aperitivo sui Navigli</h4><p>Il rito milanese per eccellenza. Dalle 18 alle 21.</p><div class="gc-dist">📍 Navigli · 2 min a piedi</div></div>
+          <div class="g-card"><span class="gc-type">Cultura</span><h4>Duomo di Milano</h4><p>Vai alle 8 del mattino per evitare la folla.</p><div class="gc-dist">📍 Piazza Duomo · 15 min metro</div></div>
+        </div>
+        <div id="mi-andare" class="g-content">
+          <div class="g-card"><span class="gc-type">Lago</span><h4>Lago di Como</h4><p>1 ora di treno. Bellagio è il borgo più bello.</p><div class="gc-dist">🚂 1h da Milano Centrale</div></div>
+          <div class="g-card"><span class="gc-type">Borgo</span><h4>Bergamo Alta</h4><p>Il borgo medievale più bello della Lombardia.</p><div class="gc-dist">🚂 50 min da Milano</div></div>
+          <div class="g-card"><span class="gc-type">Quartiere</span><h4>Brera</h4><p>Gallerie d'arte, negozietti e bar deliziosi.</p><div class="gc-dist">📍 20 min a piedi</div></div>
+          <div class="g-card"><span class="gc-type">Natura</span><h4>Parco Sempione</h4><p>Il polmone verde di Milano. Perfetto per il relax.</p><div class="gc-dist">📍 25 min a piedi</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="book-sidebar">
+      <div class="book-card reveal" id="mi-booking">
+        <div class="book-hdr"><h3>Prenota il soggiorno</h3><p>Disponibilità real-time · Smoobu</p></div>
+        <div class="price-row"><span>A partire da</span><span class="price-num">89€</span><span class="price-night">/ notte</span></div>
+        <div class="smoobu-wrap">
+          <div id="smoobuApartment2627723de" class="calendarWidget">
+            <div class="calendarContent"
+              data-load-calendar-url="https://login.smoobu.com/de/cockpit/widget/single-calendar/2627723"
+              data-verification="b05d9a456aa4f44118b43c1127bf74f49747c68aadf8abaa0b9e172333d553d2"
+              data-baseUrl="https://login.smoobu.com"
+              data-disable-css="false"></div>
+            <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript" src="https://login.smoobu.com/js/Apartment/CalendarWidget.js"></script>
+          </div>
+        </div>
+        <div class="book-actions">
+          <a href="https://wa.me/390240707779" class="wa-btn" target="_blank">💬 Scrivici su WhatsApp</a>
+          <div class="book-div">oppure prenota su</div>
+          <div class="plats"><a href="#" class="plat-btn">🔵 Booking</a><a href="#" class="plat-btn">🌸 Airbnb</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="ft-brand"><a class="ft-logo" onclick="goHome()" style="color:rgba(255,255,255,0.85);display:flex;align-items:center;gap:10px;text-decoration:none;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" style="height:40px;width:auto;display:block;"><path d="M50 4 L94 52 L94 128 L6 128 L6 52 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 70 L50 100 L80 70" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/></svg><span style="font-family:'Dancing Script',cursive;font-size:1.1rem;line-height:1.1;"><span style="display:block">Romantic</span><span style="display:block">Vibes</span></span></a><p>Boutique stays a Milano, Desenzano del Garda e Verona.</p></div>
+    <div><h4>Destinazioni</h4><ul><li onclick="showPage('verona')">Verona Romantic Vibes</li><li onclick="showPage('desenzano')">Desenzano Romantic Vibes</li><li onclick="showPage('milano')">Milano Romantic Vibes</li></ul></div>
+    <div><h4>Info</h4><ul><li>FAQ</li><li>Privacy</li><li>Termini</li></ul></div>
+    <div><h4>Contatti</h4><ul><li>WhatsApp</li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147d7a727b54667b79757a607d77627d7671673a7d60">[email&#160;protected]</a></li><li>Instagram</li></ul></div>
+  </footer>
+  <div class="ft-bottom"><p>© 2025 Romantic Vibes</p><p>Powered by Smoobu</p></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VERONA PAGE
+══════════════════════════════════════ -->
+<div id="page-verona" class="page">
+  <section class="hero verona-nav">
+    <div class="hero-bg" style="background:linear-gradient(160deg,#0d0200,#2a0805,#1a0505);">
+      <div class="orb" style="width:700px;height:700px;background:#c0392b;top:-200px;left:-100px;opacity:.16;"></div>
+      <div class="orb" style="width:500px;height:500px;background:#8b1a08;bottom:-100px;right:-50px;opacity:.13;animation-delay:-5s;"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-label" style="color:rgba(220,100,80,.85);border-color:rgba(192,57,43,.3);">
+        <span style="background:var(--verona);border-radius:50%;display:inline-block;width:6px;height:6px;"></span>
+        Verona Romantic Vibes
+      </div>
+      <h1>La città di<br><em>Romeo</em><br>& Giulietta</h1>
+      <p class="hero-sub">Tre dimore nel cuore di Verona. Arena, pietre antiche, vini pregiati e un'atmosfera romantica senza tempo.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" onclick="document.getElementById('ve-props').scrollIntoView({behavior:'smooth'})">Scegli la tua dimora</a>
+        <a class="btn btn-ghost" onclick="document.getElementById('ve-guide').scrollIntoView({behavior:'smooth'})">🗺️ Guida Verona</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="intro-strip">
+    <div class="is-item"><div class="is-num">3</div><div class="is-lbl">Proprietà</div></div>
+    <div class="is-sep"></div>
+    <div class="is-item"><div class="is-num">4.9</div><div class="is-lbl">Rating Airbnb</div></div>
+    <div class="is-sep"></div>
+    <div class="is-item"><div class="is-num">9.4</div><div class="is-lbl">Booking.com</div></div>
+    <div class="is-sep"></div>
+    <div class="is-item"><div class="is-num">★</div><div class="is-lbl">Superhost</div></div>
+    <div class="is-sep"></div>
+    <div class="is-item"><div class="is-num">h24</div><div class="is-lbl">Assistenza</div></div>
+  </div>
+
+  <!-- PROPERTIES -->
+  <div style="padding:5rem 3.5rem;" id="ve-props">
+    <div class="sec-hdr reveal" style="text-align:left;padding:0;margin-bottom:3rem;"><span class="ey">Le nostre dimore</span><h2 style="color:var(--dark);">Tre <em style="color:var(--verona)">anime</em> di Verona</h2></div>
+    <div class="prop-cards">
+      <!-- Card 1 -->
+      <div class="vc reveal">
+        <div class="vc-vis">
+          <div class="vc-bg" style="background:linear-gradient(160deg,#1a0505,#3d0d0d,#2a0805);position:absolute;inset:0;"></div>
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 60%,rgba(192,57,43,.4) 0%,transparent 65%);"></div>
+          <div class="vc-ov"></div><div class="vc-num">01</div>
+          <div class="vc-vis-ft"><div class="vc-vis-name">Arena <em>Suite</em></div><span class="vc-tag">Vista Arena</span></div>
+        </div>
+        <div class="vc-info">
+          <div>
+            <div class="vc-rating"><div class="rb"><div class="rp">Airbnb</div><div class="rs">4.9</div><div class="rst">★★★★★</div></div><div class="rb"><div class="rp">Booking</div><div class="rs">9.5</div><div class="rst">★★★★★</div></div></div>
+            <p class="vc-desc">Nel cuore del centro storico, a <strong>pochi passi dall'Arena</strong>. Soffitti affrescati, arredi d'epoca e ogni comfort moderno. Perfetto per coppie in cerca di un'esperienza <strong>romantica e indimenticabile</strong>.</p>
+            <div class="vc-amenities"><span class="vc-am">👥 2 ospiti</span><span class="vc-am">🛏️ 1 camera</span><span class="vc-am">📶 WiFi</span><span class="vc-am">❄️ AC</span><span class="vc-am">🔑 Self check-in</span></div>
+          </div>
+          <div><div class="vc-price">Da <strong>95€</strong> / notte</div><div class="vc-actions"><button class="btn btn-gold" onclick="openModal('Arena Suite')">Prenota</button><button class="btn btn-ghost" style="color:var(--dark);border-color:rgba(0,0,0,.2);" onclick="document.getElementById('ve-tutorial').scrollIntoView({behavior:'smooth'})">🎬 Tutorial</button></div></div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="vc reveal" style="transition-delay:.1s">
+        <div class="vc-vis">
+          <div class="vc-bg" style="background:linear-gradient(160deg,#0a0a1a,#1a1a3d,#0d0d2a);position:absolute;inset:0;"></div>
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 50%,rgba(100,80,180,.35) 0%,transparent 65%);"></div>
+          <div class="vc-ov"></div><div class="vc-num">02</div>
+          <div class="vc-vis-ft"><div class="vc-vis-name">Giulietta <em>Apartment</em></div><span class="vc-tag">Centro Storico</span></div>
+        </div>
+        <div class="vc-info">
+          <div>
+            <div class="vc-rating"><div class="rb"><div class="rp">Airbnb</div><div class="rs">4.9</div><div class="rst">★★★★★</div></div><div class="rb"><div class="rp">Booking</div><div class="rs">9.3</div><div class="rst">★★★★★</div></div></div>
+            <p class="vc-desc">A due passi dalla <strong>Casa di Giulietta</strong>. Travi a vista, luce soffusa e terrazzino privato per la colazione. Ideale per chi vuole <strong>immergersi nell'atmosfera</strong> più autentica di Verona.</p>
+            <div class="vc-amenities"><span class="vc-am">👥 2–3 ospiti</span><span class="vc-am">🌿 Terrazzo</span><span class="vc-am">📶 WiFi</span><span class="vc-am">☕ Nespresso</span></div>
+          </div>
+          <div><div class="vc-price">Da <strong>110€</strong> / notte</div><div class="vc-actions"><button class="btn btn-gold" onclick="openModal('Giulietta Apartment')">Prenota</button><button class="btn btn-ghost" style="color:var(--dark);border-color:rgba(0,0,0,.2);" onclick="document.getElementById('ve-tutorial').scrollIntoView({behavior:'smooth'})">🎬 Tutorial</button></div></div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="vc reveal" style="transition-delay:.2s">
+        <div class="vc-vis">
+          <div class="vc-bg" style="background:linear-gradient(160deg,#0d0a05,#2a2008,#1a1505);position:absolute;inset:0;"></div>
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 70%,rgba(180,140,40,.3) 0%,transparent 65%);"></div>
+          <div class="vc-ov"></div><div class="vc-num">03</div>
+          <div class="vc-vis-ft"><div class="vc-vis-name">Palazzo <em>Veronese</em></div><span class="vc-tag">Fino a 6 ospiti</span></div>
+        </div>
+        <div class="vc-info">
+          <div>
+            <div class="vc-rating"><div class="rb"><div class="rp">Airbnb</div><div class="rs">4.8</div><div class="rst">★★★★★</div></div><div class="rb"><div class="rp">Booking</div><div class="rs">9.4</div><div class="rst">★★★★★</div></div></div>
+            <p class="vc-desc"><strong>Tre camere</strong>, salone con camino, cucina professionale. Perfetto per famiglie o gruppi. La <strong>Valpolicella</strong> a 20 minuti, il centro storico sotto casa.</p>
+            <div class="vc-amenities"><span class="vc-am">👥 Fino a 6</span><span class="vc-am">🛏️ 3 camere</span><span class="vc-am">🔥 Camino</span><span class="vc-am">🅿️ Parcheggio</span></div>
+          </div>
+          <div><div class="vc-price">Da <strong>185€</strong> / notte</div><div class="vc-actions"><button class="btn btn-gold" onclick="openModal('Palazzo Veronese')">Prenota</button><button class="btn btn-ghost" style="color:var(--dark);border-color:rgba(0,0,0,.2);" onclick="document.getElementById('ve-tutorial').scrollIntoView({behavior:'smooth'})">🎬 Tutorial</button></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TUTORIALS -->
+  <div style="padding:4rem 3.5rem;background:var(--cream);" id="ve-tutorial">
+    <div class="sec-hdr reveal" style="text-align:left;padding:0;margin-bottom:2.5rem;"><span class="ey">Guide per gli ospiti</span><h2 style="color:var(--dark);">Tutorial per ogni <em style="color:var(--verona)">dimora</em></h2></div>
+    <div class="tuts-grid">
+      <div class="tut-card reveal"><div class="tut-hdr"><div class="tut-dot"></div><div class="tut-name">Arena Suite</div></div><div class="tut-langs"><button class="tlang active">🇮🇹</button><button class="tlang">🇬🇧</button><button class="tlang">🇩🇪</button><button class="tlang">🇫🇷</button></div><div class="tut-vid"><div class="tut-play">▶</div></div><div class="tut-links"><div class="tut-lnk"><span>🏠</span> House Tour</div><div class="tut-lnk"><span>🔑</span> Check-in & Accesso</div><div class="tut-lnk"><span>📶</span> WiFi</div><div class="tut-lnk"><span>❄️</span> Climatizzazione</div></div></div>
+      <div class="tut-card reveal" style="transition-delay:.1s"><div class="tut-hdr"><div class="tut-dot"></div><div class="tut-name">Giulietta Apartment</div></div><div class="tut-langs"><button class="tlang active">🇮🇹</button><button class="tlang">🇬🇧</button><button class="tlang">🇩🇪</button><button class="tlang">🇫🇷</button></div><div class="tut-vid"><div class="tut-play">▶</div></div><div class="tut-links"><div class="tut-lnk"><span>🏠</span> House Tour</div><div class="tut-lnk"><span>🌿</span> Terrazzo</div><div class="tut-lnk"><span>☕</span> Nespresso</div><div class="tut-lnk"><span>🔑</span> Check-in</div></div></div>
+      <div class="tut-card reveal" style="transition-delay:.2s"><div class="tut-hdr"><div class="tut-dot"></div><div class="tut-name">Palazzo Veronese</div></div><div class="tut-langs"><button class="tlang active">🇮🇹</button><button class="tlang">🇬🇧</button><button class="tlang">🇩🇪</button><button class="tlang">🇫🇷</button></div><div class="tut-vid"><div class="tut-play">▶</div></div><div class="tut-links"><div class="tut-lnk"><span>🏠</span> Tour del Palazzo</div><div class="tut-lnk"><span>🔥</span> Camino</div><div class="tut-lnk"><span>🍳</span> Cucina Pro</div><div class="tut-lnk"><span>🅿️</span> Parcheggio</div></div></div>
+    </div>
+  </div>
+
+  <!-- CITY GUIDE -->
+  <section style="padding:5rem 3.5rem;background:var(--dark);" id="ve-guide">
+    <div class="sec-hdr reveal"><span class="ey">Vivere Verona come un locale</span><h2>La tua guida <em>esclusiva</em></h2></div>
+    <div class="cg-tabs">
+      <button class="cg-tab active" onclick="showCityGuide('ve','mangiare',this)">🍷 Dove mangiare</button>
+      <button class="cg-tab" onclick="showCityGuide('ve','fare',this)">🎭 Cosa fare</button>
+      <button class="cg-tab" onclick="showCityGuide('ve','andare',this)">🗺️ Dove andare</button>
+    </div>
+    <div id="ve-cg-mangiare" class="cg-content active reveal">
+      <div class="cg-card"><span class="cg-type">Osteria</span><h4>Osteria dal Capo</h4><p>Cucina veronese autentica, vino sfuso e prezzi onesti.</p><div class="cg-dist">📍 Via del Pontiere · 5 min</div></div>
+      <div class="cg-card"><span class="cg-type">Vino</span><h4>Antica Bottega del Vino</h4><p>Dal 1890. La carta vini più bella di Verona. Amarone in primis.</p><div class="cg-dist">📍 Vicolo Scudo di Francia · 8 min</div></div>
+      <div class="cg-card"><span class="cg-type">Colazione</span><h4>Caffè Tubino</h4><p>Il più antico caffè di Verona. Cappuccino perfetto ogni mattina.</p><div class="cg-dist">📍 Corso Porta Borsari · 6 min</div></div>
+      <div class="cg-card"><span class="cg-type">Gelato</span><h4>Gelateria Savoia</h4><p>Dal 1939. Il gusto Amarone al cioccolato è una specialità unica.</p><div class="cg-dist">📍 Via Roma · 7 min</div></div>
+    </div>
+    <div id="ve-cg-fare" class="cg-content reveal">
+      <div class="cg-card"><span class="cg-type">Spettacolo</span><h4>Opera all'Arena</h4><p>Il teatro all'aperto più bello del mondo. Prenota con mesi di anticipo.</p><div class="cg-dist">📍 Piazza Bra · 3 min</div></div>
+      <div class="cg-card"><span class="cg-type">Romantico</span><h4>Casa di Giulietta</h4><p>Vai all'alba per viverla senza folla e senza filtri.</p><div class="cg-dist">📍 Via Cappello · 5 min</div></div>
+      <div class="cg-card"><span class="cg-type">Panorama</span><h4>Castel San Pietro</h4><p>La vista su Verona al tramonto diventa magia pura.</p><div class="cg-dist">📍 Salita Castel S.Pietro · 15 min</div></div>
+      <div class="cg-card"><span class="cg-type">Mercato</span><h4>Mercato di Piazza Erbe</h4><p>Ogni mattina dal lunedì al sabato. Atmosfera medievale intatta.</p><div class="cg-dist">📍 Piazza Erbe · 4 min</div></div>
+    </div>
+    <div id="ve-cg-andare" class="cg-content reveal">
+      <div class="cg-card"><span class="cg-type">Vino</span><h4>Valpolicella</h4><p>Cantine storiche, Amarone e Ripasso direttamente dal produttore.</p><div class="cg-dist">🚗 20 min</div></div>
+      <div class="cg-card"><span class="cg-type">Lago</span><h4>Lago di Garda</h4><p>Sirmione con il castello scaligero è imperdibile.</p><div class="cg-dist">🚗 30 min</div></div>
+      <div class="cg-card"><span class="cg-type">Città</span><h4>Mantova</h4><p>Patrimonio UNESCO, Palazzo Ducale e tortelli di zucca.</p><div class="cg-dist">🚂 40 min</div></div>
+      <div class="cg-card"><span class="cg-type">Natura</span><h4>Monte Baldo</h4><p>In funivia da Malcesine. Vista sul Garda e sci in inverno.</p><div class="cg-dist">🚗 45 min</div></div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="svc-section" style="background:var(--forest);">
+    <div class="svc-section-inner">
+      <div class="reveal"><div class="svc-text"><span class="ey">Siamo qui per te</span><h2>Cura e <em>attenzione</em> ad ogni passo</h2><p>Dal momento della prenotazione all'ultimo giorno del tuo soggiorno, il nostro team è sempre disponibile.</p></div></div>
+      <div class="svc-cards reveal">
+        <a href="https://wa.me/390240707779" class="svc-c" target="_blank"><span class="svc-c-icon">💬</span><h4>WhatsApp h24</h4><p>In italiano, inglese, tedesco e francese.</p></a>
+        <div class="svc-c"><span class="svc-c-icon">🤖</span><h4>Assistente Virtuale</h4><p>AI disponibile 24/7 per qualsiasi domanda.</p></div>
+        <div class="svc-c"><span class="svc-c-icon">🔑</span><h4>Self Check-in</h4><p>Istruzioni complete 24h prima dell'arrivo.</p></div>
+        <div class="svc-c"><span class="svc-c-icon">🎬</span><h4>Tutorial multilingua</h4><p>Video per ogni appartamento in IT, EN, DE, FR.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft-brand"><a class="ft-logo" onclick="goHome()" style="color:rgba(255,255,255,0.85);display:flex;align-items:center;gap:10px;text-decoration:none;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" style="height:40px;width:auto;display:block;"><path d="M50 4 L94 52 L94 128 L6 128 L6 52 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 70 L50 100 L80 70" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/></svg><span style="font-family:'Dancing Script',cursive;font-size:1.1rem;line-height:1.1;"><span style="display:block">Romantic</span><span style="display:block">Vibes</span></span></a><p>Boutique stays a Milano, Desenzano del Garda e Verona.</p></div>
+    <div><h4>Destinazioni</h4><ul><li onclick="showPage('verona')">Verona Romantic Vibes</li><li onclick="showPage('desenzano')">Desenzano Romantic Vibes</li><li onclick="showPage('milano')">Milano Romantic Vibes</li></ul></div>
+    <div><h4>Info</h4><ul><li>FAQ</li><li>Privacy</li><li>Termini</li></ul></div>
+    <div><h4>Contatti</h4><ul><li>WhatsApp</li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff96919990bf8d90929e918b969c89969d9a8cd1968b">[email&#160;protected]</a></li><li>Instagram</li></ul></div>
+  </footer>
+  <div class="ft-bottom"><p>© 2025 Romantic Vibes</p><p>Powered by Smoobu</p></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     DESENZANO PAGE
+══════════════════════════════════════ -->
+<div id="page-desenzano" class="page">
+  <section class="hero garda-nav">
+    <div class="hero-bg" style="background:linear-gradient(180deg,#020d15,#051a25,#051f2a,#071510);">
+      <div class="orb" style="width:800px;height:400px;background:#2e9db5;top:40%;left:-200px;opacity:.16;animation:wave 10s ease-in-out infinite alternate;"></div>
+      <div class="orb" style="width:600px;height:300px;background:#1a6b80;top:50%;right:-100px;opacity:.13;animation:wave 12s ease-in-out infinite alternate-reverse;"></div>
+      <div class="orb" style="width:400px;height:400px;background:#0d3d20;bottom:-100px;left:30%;opacity:.18;animation:wave 8s ease-in-out infinite alternate;"></div>
+    </div>
+    <div style="position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(to top,rgba(46,157,181,.1) 0%,transparent 100%);z-index:1;"></div>
+    <div class="hero-content">
+      <div class="hero-label" style="color:rgba(100,200,220,.85);border-color:rgba(46,157,181,.3);">
+        <span style="background:var(--garda);border-radius:50%;display:inline-block;width:6px;height:6px;"></span>
+        Desenzano Romantic Vibes
+      </div>
+      <h1>Sul <em>lago</em><br>di Garda</h1>
+      <p class="hero-sub">Un'oasi di pace e bellezza sul lago più amato d'Italia. Acque cristalline, tramonti da sogno e la dolcezza del Garda a due passi da casa.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" onclick="document.getElementById('de-booking').scrollIntoView({behavior:'smooth'})">Prenota ora</a>
+        <a class="btn btn-ghost" onclick="document.getElementById('de-tutorial').scrollIntoView({behavior:'smooth'})">🎬 Tutorial casa</a>
+        <a class="btn btn-ghost" href="https://wa.me/390240707779" target="_blank">💬 WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <div class="gallery">
+    <div class="gi"><div class="gi-bg" style="height:100%;background:linear-gradient(160deg,#051520,#0d3040,#051a30);"></div><div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 70%,rgba(46,157,181,.4) 0%,transparent 60%);"></div><span class="gi-lbl">Vista lago</span></div>
+    <div class="gi"><div class="gi-bg" style="height:100%;background:linear-gradient(160deg,#020d15,#0a2030,#051520);"></div><span class="gi-lbl">Soggiorno</span></div>
+    <div class="gi" style="position:relative"><div class="gi-bg" style="height:100%;background:linear-gradient(160deg,#051015,#0d2535,#051015);"></div><span class="gi-lbl">Camera</span><span class="gi-all">Tutte le foto →</span></div>
+    <div class="gi"><div class="gi-bg" style="height:100%;background:linear-gradient(160deg,#0a1520,#152535,#0a1520);"></div><span class="gi-lbl">Terrazzo</span></div>
+    <div class="gi"><div class="gi-bg" style="height:100%;background:linear-gradient(160deg,#051020,#0a2030,#051020);"></div><span class="gi-lbl">Cucina</span></div>
+  </div>
+
+  <div class="prop-layout">
+    <div>
+      <div class="prop-hdr reveal">
+        <h2 class="prop-name">Desenzano<br><em style="color:var(--garda)">sul Lago di Garda</em></h2>
+        <div class="prop-meta"><span class="meta-i">📍 Lungolago, Desenzano</span><span class="meta-i">👥 Fino a 4 ospiti</span><span class="meta-i">🛏️ 2 camere</span><span class="meta-i">🌊 Vista lago</span></div>
+        <div class="ratings">
+          <div class="rb"><div class="rp">Airbnb</div><div class="rs">4.9</div><div class="rst">★★★★★ Superhost</div></div>
+          <div class="rb"><div class="rp">Booking.com</div><div class="rs">9.4</div><div class="rst">★★★★★ Eccezionale</div></div>
+        </div>
+      </div>
+      <p class="prop-desc reveal">Immagina di svegliarti con la <strong>vista sul lago di Garda</strong>. Un appartamento luminoso ed elegante sul lungolago di Desenzano.<br><br>Ogni mattina il mercato del pesce è a 5 minuti. Ogni sera il tramonto sul lago ti aspetta dal terrazzo. Ogni momento qui è <strong>pura magia</strong>.</p>
+
+      <!-- HIGHLIGHT -->
+      <div class="hl-strip reveal">
+        <div class="hl-item"><span class="hl-icon">🌅</span><div class="hl-title">Vista lago</div><div class="hl-desc">Terrazzo privato con vista diretta sulle acque del Garda</div></div>
+        <div class="hl-item"><span class="hl-icon">🚶</span><div class="hl-title">Posizione</div><div class="hl-desc">2 minuti a piedi dal lungolago e dal centro storico</div></div>
+        <div class="hl-item"><span class="hl-icon">⛵</span><div class="hl-title">Attività</div><div class="hl-desc">Barche, kitesurf, escursioni in battello — organizziamo noi</div></div>
+      </div>
+
+      <div class="reveal">
+        <span class="section-lbl">✦ Cosa trovi</span>
+        <div class="am-grid">
+          <div class="am-item"><span>🌊</span> Vista lago</div><div class="am-item"><span>🌿</span> Terrazzo privato</div><div class="am-item"><span>📶</span> WiFi fibra</div>
+          <div class="am-item"><span>❄️</span> Aria condizionata</div><div class="am-item"><span>☕</span> Macchina caffè</div><div class="am-item"><span>🍳</span> Cucina completa</div>
+          <div class="am-item"><span>🧺</span> Lavatrice</div><div class="am-item"><span>🔑</span> Self check-in</div><div class="am-item"><span>🅿️</span> Parcheggio</div>
+        </div>
+      </div>
+
+      <div class="sec-div reveal"><span>Tutorial della casa</span></div>
+
+      <div class="tutorial reveal" id="de-tutorial">
+        <h3>Guida alla tua dimora</h3>
+        <div class="t-tabs">
+          <button class="t-tab active">🇮🇹 Italiano</button>
+          <button class="t-tab">🇬🇧 English</button>
+          <button class="t-tab">🇩🇪 Deutsch</button>
+          <button class="t-tab">🇫🇷 Français</button>
+        </div>
+        <div style="background:rgba(255,255,255,.05);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem;cursor:pointer;">
+          <div class="tut-play">▶</div>
+          <div style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);">House Tour Completo</div>
+        </div>
+        <div class="vid-list">
+          <div class="vid-item active"><span class="vi-icon">🏠</span><div class="vi-info"><div class="vi-title">House Tour</div>Vista lago inclusa</div></div>
+          <div class="vid-item"><span class="vi-icon">🌿</span><div class="vi-info"><div class="vi-title">Terrazzo & Vista</div>Come godersi il lago</div></div>
+          <div class="vid-item"><span class="vi-icon">🔑</span><div class="vi-info"><div class="vi-title">Check-in Autonomo</div>Accesso senza stress</div></div>
+          <div class="vid-item"><span class="vi-icon">📶</span><div class="vi-info"><div class="vi-title">WiFi</div>Connessione rapida</div></div>
+          <div class="vid-item"><span class="vi-icon">🍳</span><div class="vi-info"><div class="vi-title">Cucina</div>Elettrodomestici</div></div>
+          <div class="vid-item"><span class="vi-icon">❄️</span><div class="vi-info"><div class="vi-title">Climatizzazione</div>AC & Riscaldamento</div></div>
+        </div>
+      </div>
+
+      <div class="sec-div reveal"><span>Servizi per gli ospiti</span></div>
+
+      <div class="svc-grid reveal">
+        <a href="https://wa.me/390240707779" class="svc-card" target="_blank"><span class="svc-icon">💬</span><div class="svc-info"><h4>WhatsApp h24</h4><p>Rispondiamo sempre in 4 lingue.</p><span class="svc-lnk">Scrivici →</span></div></a>
+        <div class="svc-card"><span class="svc-icon">🤖</span><div class="svc-info"><h4>Assistente Virtuale</h4><p>AI disponibile 24/7.</p><span class="svc-lnk">Chatta →</span></div></div>
+        <div class="svc-card"><span class="svc-icon">⛵</span><div class="svc-info"><h4>Esperienze sul lago</h4><p>Barche, kayak, tour in battello — ci pensiamo noi.</p><span class="svc-lnk">Scopri →</span></div></div>
+        <div class="svc-card"><span class="svc-icon">🔑</span><div class="svc-info"><h4>Self Check-in</h4><p>Istruzioni complete 24h prima dell'arrivo.</p><span class="svc-lnk">Come funziona →</span></div></div>
+      </div>
+
+      <div class="sec-div reveal"><span>Esplora il Garda</span></div>
+
+      <div class="reveal">
+        <div class="g-tabs">
+          <button class="g-tab active" onclick="showGuide('de','mangiare',this)">🐟 Dove mangiare</button>
+          <button class="g-tab" onclick="showGuide('de','fare',this)">⛵ Cosa fare</button>
+          <button class="g-tab" onclick="showGuide('de','andare',this)">🗺️ Dove andare</button>
+        </div>
+        <div id="de-mangiare" class="g-content active">
+          <div class="g-card" style="border-left-color:var(--garda)"><span class="gc-type" style="color:var(--garda)">Pesce</span><h4>Ristorante Esplanade</h4><p>Il miglior pesce di lago di Desenzano.</p><div class="gc-dist">📍 Via Lario · 5 min</div></div>
+          <div class="g-card" style="border-left-color:var(--garda)"><span class="gc-type" style="color:var(--garda)">Aperitivo</span><h4>Bagni Pubblici</h4><p>Aperitivo sul lungolago. Tramonto garantito.</p><div class="gc-dist">📍 Lungolago · 3 min</div></div>
+          <div class="g-card" style="border-left-color:var(--garda)"><span class="gc-type" style="color:var(--garda)">Gelato</span><h4>Gelateria Dondoli</h4><p>Campione mondiale di gelateria.</p><div class="gc-dist">📍 Piazza Malvezzi · 4 min</div></div>
+          <div class="g-card" style="border-left-color:var(--garda)"><span class="gc-type" style="color:var(--garda)">Colazione</span><h4>Caffè Italia</h4><p>La colazione dei desenzanesi doc.</p><div class="gc-dist">📍 Lungolago · 2 min</div></div>
+        </div>
+        <div id="de-fare" class="g-content">
+          <div class="g-card" style="border-left-color:var(--garda)"><span class="gc-type" style="color:var(--garda)">Lago</span><h4>Tour in Battello</h4><p>Giro del lago con fermate a Sirmione e Gardone.</p><div class="gc-dist">🚢 Porto · 5 min</div></div>
+          <div class="g-card" style="border-left-color:var(--garda)"><span class="gc-type" style="color:var(--garda)">Sport</span><h4>Kitesurf & Windsurf</h4><p>Il Garda è tra i migliori spot al mondo.</p><div class="gc-dist">🚗 40 min nord</div></div>
+          <div class="g-card" style="border-left-color:var(--garda)"><span class="gc-type" style="color:var(--garda)">Storia</span><h4>Sirmione & Grotte di Catullo</h4><p>Castello scaligero e rovine romane sul lago.</p><div class="gc-dist">🚗 15 min</div></div>
+          <div class="g-card" style="border-left-color:var(--garda)"><span class="gc-type" style="color:var(--garda)">Relax</span><h4>Terme di Sirmione</h4><p>Piscine termali sul lago. Da prenotare.</p><div class="gc-dist">🚗 15 min</div></div>
+        </div>
+        <div id="de-andare" class="g-content">
+          <div class="g-card" style="border-left-color:var(--garda)"><span class="gc-type" style="color:var(--garda)">Città</span><h4>Verona</h4><p>Arena, Romeo e Giulietta, Amarone.</p><div class="gc-dist">🚂 30 min</div></div>
+          <div class="g-card" style="border-left-color:var(--garda)"><span class="gc-type" style="color:var(--garda)">Montagna</span><h4>Monte Baldo</h4><p>In funivia da Malcesine. Vista lago unica.</p><div class="gc-dist">🚗 50 min</div></div>
+          <div class="g-card" style="border-left-color:var(--garda)"><span class="gc-type" style="color:var(--garda)">Città</span><h4>Brescia</h4><p>Città romana e cucina straordinaria.</p><div class="gc-dist">🚂 25 min</div></div>
+          <div class="g-card" style="border-left-color:var(--garda)"><span class="gc-type" style="color:var(--garda)">Borghi</span><h4>Gargnano & Tremosine</h4><p>I borghi più pittoreschi del lago.</p><div class="gc-dist">🚗 45 min</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="book-sidebar">
+      <div class="book-card reveal" id="de-booking">
+        <div class="book-hdr"><h3>Prenota il soggiorno</h3><p>Disponibilità real-time · Smoobu</p></div>
+        <div class="price-row"><span>A partire da</span><span class="price-num">115€</span><span class="price-night">/ notte</span></div>
+        <div class="smoobu-wrap" style="padding:1.5rem;text-align:center;">
+          <p style="font-size:.7rem;color:var(--warm-gray);line-height:1.8;margin-bottom:.5rem;">Widget prenotazione <strong>Smoobu</strong> — da integrare con le credenziali API di Desenzano.</p>
+          <small style="font-size:.56rem;color:rgba(0,0,0,.3);">SMOOBU WIDGET DESENZANO</small>
+        </div>
+        <div class="book-actions">
+          <a href="https://wa.me/390240707779" class="wa-btn" target="_blank">💬 Scrivici su WhatsApp</a>
+          <div class="book-div">oppure prenota su</div>
+          <div class="plats"><a href="#" class="plat-btn">🔵 Booking</a><a href="#" class="plat-btn">🌸 Airbnb</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="ft-brand"><a class="ft-logo" onclick="goHome()" style="color:rgba(255,255,255,0.85);display:flex;align-items:center;gap:10px;text-decoration:none;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" style="height:40px;width:auto;display:block;"><path d="M50 4 L94 52 L94 128 L6 128 L6 52 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 70 L50 100 L80 70" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/></svg><span style="font-family:'Dancing Script',cursive;font-size:1.1rem;line-height:1.1;"><span style="display:block">Romantic</span><span style="display:block">Vibes</span></span></a><p>Boutique stays a Milano, Desenzano del Garda e Verona.</p></div>
+    <div><h4>Destinazioni</h4><ul><li onclick="showPage('verona')">Verona Romantic Vibes</li><li onclick="showPage('desenzano')">Desenzano Romantic Vibes</li><li onclick="showPage('milano')">Milano Romantic Vibes</li></ul></div>
+    <div><h4>Info</h4><ul><li>FAQ</li><li>Privacy</li><li>Termini</li></ul></div>
+    <div><h4>Contatti</h4><ul><li>WhatsApp</li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aac3c4ccc5ead8c5c7cbc4dec3c9dcc3c8cfd984c3de">[email&#160;protected]</a></li><li>Instagram</li></ul></div>
+  </footer>
+  <div class="ft-bottom"><p>© 2025 Romantic Vibes</p><p>Powered by Smoobu</p></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-ov" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-hdr"><h3 id="modal-title">Prenota</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-smoobu"><p>Widget prenotazione <strong>Smoobu</strong> per questa proprietà.</p><small>Da integrare con le credenziali API Smoobu</small></div>
+      <div class="modal-acts">
+        <a href="https://wa.me/390240707779" class="wa-btn" target="_blank">💬 Prenota via WhatsApp</a>
+        <div class="modal-div">oppure</div>
+        <div class="modal-plats"><a href="#" class="plat-btn">🔵 Booking.com</a><a href="#" class="plat-btn">🌸 Airbnb</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── NAVIGATION ──
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+  updateNav(id);
+  // reinit reveal on new page
+  setTimeout(initReveal, 100);
+}
+function goHome() {
+  showPage('home');
+}
+function updateNav(id) {
+  const nav = document.getElementById('nav');
+  const backWrap = document.getElementById('nav-back-wrap');
+  const homeLinks = document.getElementById('nav-links-home');
+  nav.className = '';
+  if (id === 'home') {
+    backWrap.innerHTML = '';
+    homeLinks.style.display = 'flex';
+  } else {
+    backWrap.innerHTML = '<span class="nav-back" onclick="goHome()">Tutte le dimore</span>';
+    homeLinks.style.display = 'none';
+    nav.classList.add(id + '-nav');
+  }
+}
+
+// ── SCROLL NAV ──
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── REVEAL ──
+function initReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: .1 });
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el));
+}
+initReveal();
+
+// ── MILANO TUTORIAL ──
+const miVideos = {
+  en: [
+    { id:'QQ1YHHPV-zQ', icon:'🏠', title:'House Tour',           sub:'EN · Full walkthrough' },
+    { id:'6Ol3RxumKCA', icon:'🔑', title:'Check-in & Access',    sub:'EN · Self check-in' },
+    { id:'frwBsgQwHaA', icon:'📶', title:'WiFi Connection',       sub:'EN · All devices' },
+    { id:'0vKEQ7_eadw', icon:'🍳', title:'Kitchen & Appliances',  sub:'EN · How to use' },
+    { id:'wTiYxDsQck8', icon:'❄️', title:'Air Conditioning',      sub:'EN · Heating & AC' },
+    { id:'26hqr6m06ks', icon:'🚿', title:'Bathroom & Washing',    sub:'EN · Instructions' },
+  ],
+  it: [
+    { id:'QQ1YHHPV-zQ', icon:'🏠', title:'House Tour Completo',      sub:'IT · Panoramica' },
+    { id:'6Ol3RxumKCA', icon:'🔑', title:'Check-in & Accesso',        sub:'IT · Self check-in' },
+    { id:'kIQH8CoNiqE', icon:'📶', title:'Connessione WiFi',           sub:'IT · Tutti i dispositivi' },
+    { id:'OVutfdQRSSE', icon:'🍳', title:'Cucina & Elettrodomestici',  sub:'IT · Come usarli' },
+    { id:'wTiYxDsQck8', icon:'❄️', title:'Climatizzazione',            sub:'IT · Riscaldamento & AC' },
+    { id:'h3An-anjlyQ', icon:'🚿', title:'Bagno & Lavatrice',          sub:'IT · Istruzioni' },
+  ]
+};
+let miLang = 'en';
+function miSetLang(lang, btn) {
+  miLang = lang;
+  document.querySelectorAll('#page-milano .t-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  miRenderList(lang);
+}
+function miRenderList(lang) {
+  const vids = miVideos[lang] || miVideos.en;
+  document.getElementById('mi-vidlist').innerHTML = vids.map((v,i) => `
+    <div class="vid-item ${i===0?'active':''}" onclick="miLoadVideo('${v.id}',this)">
+      <span class="vi-icon">${v.icon}</span>
+      <div class="vi-info"><div class="vi-title">${v.title}</div>${v.sub}</div>
+    </div>`).join('');
+  document.getElementById('mi-iframe').src = 'https://www.youtube.com/embed/' + vids[0].id;
+}
+function miLoadVideo(id, el) {
+  document.getElementById('mi-iframe').src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+  document.querySelectorAll('#mi-vidlist .vid-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+}
+miRenderList('en');
+
+// ── GUIDES (property pages) ──
+function showGuide(prefix, id, btn) {
+  const page = document.getElementById('page-' + (prefix==='mi'?'milano':prefix==='de'?'desenzano':'verona'));
+  page.querySelectorAll('.g-content').forEach(c => c.classList.remove('active'));
+  page.querySelectorAll('.g-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(prefix + '-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── CITY GUIDES (verona/garda dark bg) ──
+function showCityGuide(prefix, id, btn) {
+  const ids = ['mangiare','fare','andare'];
+  ids.forEach(k => {
+    const el = document.getElementById(prefix + '-cg-' + k);
+    if(el) el.classList.remove('active');
+  });
+  document.querySelectorAll('#page-' + (prefix==='ve'?'verona':'desenzano') + ' .cg-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(prefix + '-cg-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── TUTORIAL LANG TABS (Verona) ──
+document.querySelectorAll('.tut-langs').forEach(tabs => {
+  tabs.querySelectorAll('.tlang').forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.querySelectorAll('.tlang').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+});
+
+// ── VIDEO ITEMS (Desenzano) ──
+document.querySelectorAll('#page-desenzano .vid-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('#page-desenzano .vid-item').forEach(i
